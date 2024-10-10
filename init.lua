@@ -1,4 +1,35 @@
-require("neovim.core.options")
-require("neovim.core.mappings")
-require("neovim.core.lazy")
+local core = "neovim.core."
+local configs = "neovim.configs."
 
+-- Core
+require(core .. "options")
+require(core .. "mappings")
+require("neovim.plugins")
+require(core .. "themes")
+
+-- Plugins
+require(configs .. "neo-tree")
+require(configs .. "treesitter")
+require(configs .. "nvim-lspconfig")
+require(configs .. "cmp")
+require(configs .. "mason")
+require(configs .. "telescope")
+-- require(configs .. "dashboard")
+require(configs .. "nvim-colorizer")
+require(configs .. "lualine")
+require(configs .. "luasnip")
+require(configs .. "flash")
+require(configs .. "bufferline")
+require(configs .. "todo-comments")
+-- require(configs .. "trouble")
+require(configs .. "toggleterm")
+require(configs .. "which-key")
+require(configs .. "surround")
+require(configs .. "auto-session")
+require(configs .. "auto-closers")
+require(configs .. "conform")
+require(configs .. "indent-blankline")
+require(configs .. "git")
+require(configs .. "lint")
+require(configs .. "dap")
+require(configs .. "neotest")
