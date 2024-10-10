@@ -1,0 +1,388 @@
+-- vim.opt.termguicolors = true
+require("bufferline").setup {
+	--       options = {
+	--         mode = "buffers",
+	--
+	--         indicator = {
+	--           icon = "", -- "▎", -- this should be omitted if indicator style is not 'icon'
+	--           style = "icon", -- 'icon' | 'underline' | 'none',
+	--         },
+	--
+	--         separator_style = "slope", -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+	--
+	--         -- hover = {
+	--         --   enabled = false,
+	--         --   delay = 200,
+	--         --   reveal = { "close" },
+	--         -- },
+	--
+	--         diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
+	-- 					--    diagnostics_indicator = function(count, level)
+	-- 					--      local icon = level:match("error") and ""
+	-- 					--        or level:match("warning") and ""
+	-- 					--        or level:match("hint") and "󰠠"
+	-- 					-- -- Если нужны индикаторы от LSP то вернуть что то
+	-- 					--      return "" .. icon .. " " .. count
+	-- 					--      -- return  "" .. count
+	-- 					--    end,
+	--
+	--         -- custom_areas = {
+	--         --   right = function()
+	--         --     local result = {}
+	--         --     local seve = vim.diagnostic.severity
+	--         --     local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
+	--         --     local warning = #vim.diagnostic.get(0, { severity = seve.WARN })
+	--         --     local info = #vim.diagnostic.get(0, { severity = seve.INFO })
+	--         --     local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
+	--         --
+	--         --     if error ~= 0 then
+	--         --       table.insert(result, { text = "  " .. error, fg = "#EC5241" })
+	--         --     end
+	--         --
+	--         --     if warning ~= 0 then
+	--         --       table.insert(result, { text = "  " .. warning, fg = "#EFB839" })
+	--         --     end
+	--         --
+	--         --     if hint ~= 0 then
+	--         --       table.insert(result, { text = "  " .. hint, fg = "#A3BA5E" })
+	--         --     end
+	--         --
+	--         --     if info ~= 0 then
+	--         --       table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
+	--         --     end
+	--         --     return result
+	--         --   end,
+	--         -- },
+	--         groups = {
+	--           items = {
+	--             require("bufferline.groups").builtin.pinned:with({ icon = "" }),
+	--           },
+	--         },
+	-- highlights = {
+	--         fill = {
+	--           bg = "#7EA9A7" -- цвет фона пустого пространства
+	--         },
+	--         background = {
+	--           bg = "#1e1e1e", -- цвет фона неактивных вкладок
+	--         },
+	--         tab_selected = {
+	--           fg = "#ffffff", -- цвет текста активной вкладки
+	--           bg = "#1e1e1e", -- цвет фона активной вкладки
+	--           bold = true,
+	--         },
+	--         tab_visible = {
+	--           fg = "#a9a9a9", -- цвет текста видимой вкладки
+	--           bg = "#1e1e1e", -- цвет фона видимой вкладки
+	--         },
+	--         separator = {
+	--           fg = "#1e1e1e", -- цвет разделителя
+	--           bg = "#1e1e1e", -- цвет фона разделителя
+	--         },
+	--         separator_selected = {
+	--           fg = "#3e4451", -- цвет разделителя в выбранной вкладке
+	--           bg = "#3e4451", -- цвет фона разделителя в выбранной вкладке
+	--         },
+	--         separator_visible = {
+	--           fg = "#1e1e1e", -- цвет разделителя в видимой вкладке
+	--           bg = "#1e1e1e", -- цвет фона разделителя в видимой вкладке
+	--         },
+	--         -- indicator_selected = {
+	--         --   fg = "#3e4451", -- цвет иконки в выбранной вкладке
+	--         --   bg = "#3e4451", -- цвет фона иконки в выбранной вкладке
+	--         -- },
+	--       },
+	--         -- highlights = {
+	--         -- 	fill = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	background = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	tab = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	tab_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	tab_separator = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	tab_separator_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		underline = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	tab_close = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	close_button = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	close_button_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	close_button_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	buffer_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	buffer_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	numbers = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	numbers_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	numbers_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	diagnostic = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	diagnostic_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	diagnostic_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	hint = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	hint_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	hint_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	hint_diagnostic = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	hint_diagnostic_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	hint_diagnostic_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	info = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	info_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	info_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	info_diagnostic = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	info_diagnostic_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	info_diagnostic_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	warning = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	warning_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	warning_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	warning_diagnostic = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	warning_diagnostic_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	warning_diagnostic_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	error = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	error_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	error_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	error_diagnostic = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	error_diagnostic_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	error_diagnostic_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		sp = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	modified = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	modified_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	modified_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	duplicate_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	duplicate_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	duplicate = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	separator_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	separator_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	separator = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	indicator_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	indicator_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	pick_selected = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	pick_visible = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	pick = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 		bold = true,
+	--         -- 		italic = true,
+	--         -- 	},
+	--         -- 	offset_separator = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- 	trunc_marker = {
+	--         -- 		fg = "<colour-value-here>",
+	--         -- 		bg = "<colour-value-here>",
+	--         -- 	},
+	--         -- },
+	--         -- diagnostics = "nvim_lsp" | "coc",
+	--       },
+}
+
+-- BUFFERLINE
+local map = vim.keymap.set
+-- map("n", "<leader>b", " ", { desc = "Buffers" }) -- collapse file explorer
+map("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "Current buffer close" })
+map("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Closes buffer by letter " })
+map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "Close All Buffers except current one" })
+map("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "buffer goto next" })
+map("n", "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "buffer goto prev" })
