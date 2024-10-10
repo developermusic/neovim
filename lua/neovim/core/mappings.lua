@@ -1,3 +1,6 @@
+-- local discipline = require "neovim.utils.discipline"
+-- discipline.cowboy()
+
 -- z | shift + m - сворачивает все блоки и вложенные
 -- z | shift + r - разворачиваети все блоки
 -- z c - сворачивает блок, в котором мы
@@ -7,8 +10,15 @@
 -- g u w - сделать прописными
 -- g U U - сделать всю строку заглавными
 -- g u u - сделать всю строку прописными
--- require "nvchad.mappings"
+
 -- :verbose nmap <C-a> -- Проверка занятости сочетаний
+
+-- Как заменить слово в файле
+-- :%s/foo/bar/g
+-- % — означает, что команда будет применена ко всему файлу.
+-- s — команда замены.
+-- g — означает замену всех вхождений в каждой строке.
+-- если в конце после g добавить c , то на каждом вхождении будет спрашивать подтверждение
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -17,7 +27,7 @@ map("v", "S-g", "G")
 
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "file copy whole" })
+-- map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "Copy all text" })
 
 -- MOVING IN INSERT MODE
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
@@ -35,78 +45,26 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv")
 
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
-map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
-map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
+map("n", "<leader>wnt", "<cmd>set nu!<CR>", { desc = "toggle line number" })
+map("n", "<leader>wnr", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 
 -- FORMATING
 map("n", "<leader>fm", function()
 	require("conform").format { lsp_fallback = true }
 end, { desc = "format files" })
 
--- GLOBAL LSP MAPPINGS
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
-map("n", "lk", vim.lsp.buf.hover, { noremap = true, silent = true })         -- Info on hover
-map("n", "hj", vim.diagnostic.open_float, { noremap = true, silent = true }) -- Float diagnostics
-
--- BUFFERLINE
-map("n", "<leader>b", " ", { desc = "Buffers" }) -- collapse file explorer
-map("n", "<leader>x", function()
-	require("nvchad.tabufline").close_buffer()
-end, { desc = "buffer close" })
-map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "buffer new" })
-map("n", "<leader>bc", function()
-	require("nvchad.tabufline").closeOtherBufs()
-end, { desc = "Closes all bufs except current one" })
-map("n", "<leader>bx", function()
-	require("nvchad.tabufline").closeAllBufs()
-end, { desc = "Close All Buffers" })
-
-map("n", "<tab>", function()
-	require("nvchad.tabufline").next()
-end, { desc = "buffer goto next" })
-
-map("n", "<S-tab>", function()
-	require("nvchad.tabufline").prev()
-end, { desc = "buffer goto prev" })
-
 -- COMMENT
 map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
 map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
 
 --NEOTREE
-map("n", "<C-\\>", "<cmd>Neotree float focus<CR>", { desc = "Explorer toggle" })              -- toggle file explorer
-map("n", "<leader>e", "<cmd>Neotree float focus<CR>", { desc = "Neotree focus window" })
-
--- NVIMTREE
---map("n", "<C-\\>", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer toggle" })              -- toggle file explorer
--- map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
--- map("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
--- map("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })   -- refresh file explorer
-
--- DIFFERENT
-map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
-
--- TERMINAL
--- map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
-map("n", "<leader>t", " ", { desc = "Terminal" })
--- toggleable terminal
-map({ "n", "t" }, "<leader>v", function()
-	require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.3 }
-end, { desc = "terminal toggleable vertical term" })
-map({ "n", "t" }, "<leader>h", function()
-	require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm", size = 0.3 }
-end, { desc = "terminal toggleable horizontal term" })
-map({ "n", "t" }, "<leader>\\", function()
-	require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
-end, { desc = "terminal toggle floating term" })
-map("n", "<leader>tn", " ", { desc = "Create new terminal" }) -- new terminal window
+-- map("n", "<C-\\>", "<cmd>Neotree float focus<CR>", { desc = "Explorer toggle" })              -- toggle file explorer
+map("n", "<leader>e", "<cmd>Neotree float focus<CR>", { desc = "File explorer focus window" })
 
 -- SPLIT WINDOW
-map("n", "<leader>s", " ", { desc = "Split window" })
-map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })     -- split window vertically
-map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })   -- split window horizontally
-map("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })      -- make split windows equal width & height
+map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
+map("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
 -- RESIZE WINDOW
@@ -115,21 +73,73 @@ map("n", "<c-w><right>", "<c-w>>")
 map("n", "<c-w><up>", "<c-w>+")
 map("n", "<c-w><down>", "<c-w>-")
 
--- SWITCH WINDOW
--- map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
--- map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
--- map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
--- map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
-
-map("n", "<leader>wr", "<cmd>:SessionRestore<CR>", { desc = "Restore session for cwd" })             -- restore last workspace session for current directory
+-- SESSIONS
+map("n", "<leader>wr", "<cmd>:SessionRestore<CR>", { desc = "Restore session for cwd" }) -- restore last workspace session for current directory
 map("n", "<leader>ws", "<cmd>:SessionSave<CR>", { desc = "Save session for auto session root dir" }) -- save workspace session for current working directory
-
--- WHICHKEY
-map("n", "<leader>wk", "<cmd>whichkey <cr>", { desc = "whichkey all keymaps" })
-map("n", "<leader>wk", function()
-	vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
-end, { desc = "whichkey query lookup" })
-
 
 map("n", "<leader>pc", "<cmd>PickColor<cr>", { desc = "Pick Color", noremap = true, silent = true })
 map("n", "<leader>pi", "<cmd>PickColorInsert<cr>", { desc = "Insert pick color", noremap = true, silent = true })
+
+-- TESTS
+map("n", "<leader>nt", function()
+	require("neotest").run.run()
+end, { desc = "Run nearest test" })
+
+map("n", "<leader>nf", function()
+	require("neotest").run.run(vim.fn.expand "%")
+end, { desc = "Run file test" })
+
+map("n", "<leader>no", ":Neotest output<CR>", { desc = "Test output" })
+map("n", "<leader>ns", ":Neotest summary<CR>", { desc = "Test summary" })
+
+-- DEBUG
+map("n", "<leader>du", function()
+	require("dapui").toggle()
+end, { desc = "Dedug UI" })
+
+map("n", "<leader>db", function()
+	require("dap").toggle_breakpoint()
+end, { desc = "Breakpoint" })
+
+map("n", "<leader>ds", function()
+	require("dap").continue()
+end, { desc = "Start" })
+
+map("n", "<leader>dn", function()
+	require("dap").step_over()
+end, { desc = "Step over" })
+
+-- keymap.set("n", "<C-j>", function()
+-- 	vim.diagnostic.goto_next()
+-- end, opts)
+--
+-- keymap.set("n", "<leader>r", function()
+-- 	require("craftzdog.hsl").replaceHexWithHSL()
+-- end)
+--
+map("n", "<leader>li", function()
+	require("neovim.utils.lsp").toggleInlayHints()
+end, { desc = "Toggle inlay hints" })
+
+-- Use system clipboard for yanked text
+map("n", "y", '"+y', { silent = true })
+map("v", "y", '"+y', { silent = true })
+
+-- Restore normal behavior for cut and other operations
+map("n", "d", '"_d', { silent = true })
+map("v", "d", '"_d', { silent = true })
+map("n", "D", '"_D', { silent = true })
+map("v", "D", '"_D', { silent = true })
+map("n", "c", '"_c', { silent = true })
+map("v", "c", '"_c', { silent = true })
+map("n", "s", '"_s', { silent = true })
+map("v", "s", '"_s', { silent = true })
+map("n", "S", '"_S', { silent = true })
+map("v", "S", '"_S', { silent = true })
+map("n", "x", '"_x', { silent = true })
+map("v", "X", '"_X', { silent = true })
+
+-- Make sure paste still works from the system clipboard
+map("n", "p", '"+p', { silent = true })
+map("v", "p", '"+p', { silent = true })
+map("v", "p", '"_dP', { silent = true }) -- Вставка поверх без изменения буфера
