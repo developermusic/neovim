@@ -177,8 +177,8 @@ require("mason-lspconfig").setup_handlers {
 	end,
 
 	-- Настройки для определённых серверов
-	["tsserver"] = function()
-		lspconfig.tsserver.setup {
+	["ts_ls"] = function()
+		lspconfig.ts_ls.setup {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			commands = {
