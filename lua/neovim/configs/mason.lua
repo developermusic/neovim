@@ -42,7 +42,7 @@ require("mason-lspconfig").setup {
 		"lua_ls", -- Используйте новые имена, например 'lua_ls' вместо 'lua-language-server'
 		"html",
 		"cssls",
-		"tsserver",
+		"ts_ls",
 		"prismals",
 		"astro",
 		"svelte",
