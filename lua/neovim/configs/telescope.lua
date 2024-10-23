@@ -73,8 +73,20 @@ map(
 	"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
 	{ desc = "Lists all files in your current working directory, hidden etc. " }
 )
-map("n", "<leader>fo", builtin.oldfiles, { desc = "Lists previously open files" })
 
+-- Определяем функцию для показа файлов из текущей директории
+function _G.old_files_in_cwd()
+	-- Получаем текущую директорию
+	local cwd = vim.fn.getcwd()
+
+	-- Используем Telescope для поиска файлов в пределах этой директории
+	builtin.oldfiles {
+		cwd_only = true, -- Фильтровать только файлы в текущей директории
+		prompt_title = "Recent opened files in current directory",
+		cwd = cwd,
+	}
+end
+map("n", "<leader>fo", ":lua old_files_in_cwd()<CR>", { noremap = true, silent = true })
 -- TEXT
 map("n", "<leader>fg", builtin.live_grep, { desc = "Search for a string in your current working directory" })
 map(
