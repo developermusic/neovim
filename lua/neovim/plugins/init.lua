@@ -111,7 +111,7 @@ require("lazy").setup {
 		priority = 1000,
 		opts = {
 			background = {
-				dark = "macchiato", -- macchiato // mocha // frappe
+				dark = "mocha", -- macchiato // mocha // frappe
 				light = "latte",
 			},
 		},
@@ -297,8 +297,8 @@ require("lazy").setup {
 		"tpope/vim-fugitive",
 	}, lazy = false },
 
-	{
-		"mfussenegger/nvim-lint",
-		event = "VeryLazy",
-	},
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	event = "VeryLazy",
+	-- },
 }
